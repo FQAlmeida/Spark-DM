@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "spark-dm"
+version = "0.1.0"
+description = ""
+authors = ["Otavio Almeida <otavioalmeida650@gmail.com>"]
+readme = "README.md"
+packages = [{include = "spark_dm"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pyspark = "^3.4.0"
+numpy = "^1.24.3"
+pandas = "^2.0.1"
+polars = "^0.17.15"
+pyarrow = "^12.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
