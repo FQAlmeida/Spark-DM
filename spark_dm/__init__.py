@@ -1,3 +1,4 @@
+from multiprocessing import Pool
 from typing import List
 from pyspark import RDD, SparkConf, SparkContext
 from pyspark.sql import SparkSession
@@ -25,9 +26,9 @@ transactions = df.groupby("BillNo").agg(pl.col("Itemname").unique())
 
 spark_transactions: RDD[List[str]] = spark_context.parallelize(
     transactions["Itemname"].to_list(), 600
-)
+).cache()
 
 model = FPGrowth.train(spark_transactions, 0.005, 4000)
 
-for rule in model.freqItemsets():  # type: ignore
-    print(rule)
+# model.freqItemsets().collect()
+model.freqItemsets().toLocalIterator()
